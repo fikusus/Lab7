@@ -18,12 +18,13 @@ namespace Zd4
         {
             try
             {
+                Stack stack = new Stack();
                 using (StreamReader sr = new StreamReader("input.txt"))
                 {
                     Console.WriteLine("Чтение из файла");
                     String input = sr.ReadLine();
                     Console.WriteLine(input);
-                    Stack stack = new Stack();
+
                     String[] words = input.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                     foreach (String item in words)
                     {
@@ -37,10 +38,16 @@ namespace Zd4
                             Console.WriteLine("Пропущен неверный символ");
                         }
                     }
-                    Console.WriteLine("\nЧисла в обратном порядке(с использованием Stack)");
-                    while (stack.Count != 0)
-                        Console.Write(stack.Pop() + " ");
                 }
+                using (StreamWriter sw = new StreamWriter("output.txt", false, System.Text.Encoding.Default))
+                {
+                    Console.WriteLine("Ответ в файле output.txt в папке с программой");
+                    sw.WriteLine("\nЧисла в обратном порядке(с использованием Stack)");
+                    while (stack.Count != 0)
+                        sw.Write(stack.Pop() + " ");
+                }
+
+
 
             }
             catch (Exception e)
